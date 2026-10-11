@@ -46,8 +46,6 @@ Comprender el concepto de contenerización y aplicar Docker para empaquetar, eje
 
 Se creó un servidor HTTP con Express que expone dos rutas: una raíz que devuelve un mensaje de bienvenida y una ruta `/suma` que realiza una operación matemática simple.
 
-> *Insertar aquí captura de pantalla de `app.js`*
-
 **Contenido del archivo:**
 
 ```js
@@ -76,8 +74,6 @@ app.listen(PORT, () => {
 
 El Dockerfile define cómo se construye la imagen: parte de una base oficial de Node.js (`node:20-alpine`), copia los archivos del proyecto, instala las dependencias y expone el puerto 3001.
 
-> *Insertar aquí captura de pantalla del Dockerfile*
-
 **Contenido del archivo:**
 
 ```dockerfile
@@ -96,14 +92,9 @@ CMD ["node", "app.js"]
 
 Se construyó la imagen con la etiqueta `lab4-docker:v1` y luego se ejecutó un contenedor en segundo plano mapeando el puerto 3001 de la máquina anfitriona al puerto 3001 del contenedor.
 
-> *Insertar aquí captura de pantalla con los comandos:*
 > - `docker build -t lab4-docker:v1 .`
 > - `docker run -d -p 3001:3001 --name lab4-container lab4-docker:v1`
 
-```
-docker build -t lab4-docker:v1 .
-docker run -d -p 3001:3001 --name lab4-container lab4-docker:v1
-```
 
 ---
 
@@ -113,11 +104,9 @@ Una vez el contenedor estaba corriendo, se probaron los dos endpoints de la apli
 
 **Endpoint raíz (GET /):** Devuelve un mensaje de bienvenida en texto plano.
 
-> *Insertar aquí captura de pantalla del navegador mostrando http://localhost:3001 con el mensaje "¡Hola desde Docker! Laboratorio 4 - UDEA 2026"*
 
 **Endpoint de suma (GET /suma):** Recibe dos parámetros `a` y `b` por query string y devuelve un JSON con el resultado de la operación.
 
-> *Insertar aquí captura de pantalla del navegador mostrando http://localhost:3001/suma?a=10&b=5 con la respuesta JSON `{"operacion":"suma","a":10,"b":5,"resultado":15}`*
 
 ```
 http://localhost:3001
@@ -132,7 +121,6 @@ Ambos endpoints respondieron correctamente, confirmando que la aplicación dentr
 
 Se utilizaron los comandos fundamentales de Docker para inspeccionar, detener y eliminar contenedores:
 
-> *Insertar aquí captura de pantalla con los comandos:*
 > - `docker ps`
 > - `docker logs lab4-container`
 > - `docker stop lab4-container`
@@ -149,10 +137,7 @@ Se utilizaron los comandos fundamentales de Docker para inspeccionar, detener y 
 
 ### 6. Publicación en Docker Hub
 
-La imagen se etiquetó con el nombre de usuario de Docker Hub y se intentó subir al registro remoto.
-
-> *Insertar aquí captura de pantalla del comando:*
-> - `docker push zifroapp/lab4-docker:v1`
+La imagen se etiquetó con el nombre de usuario de Docker Hub y se subió al registro remoto.
 
 ```
 docker tag lab4-docker:v1 zifroapp/lab4-docker:v1
@@ -165,7 +150,6 @@ docker push zifroapp/lab4-docker:v1
 
 Una vez subida la imagen, esta aparece publicada en el perfil de Docker Hub, desde donde puede ser descargada y ejecutada por cualquier persona con Docker instalado.
 
-> *Insertar aquí captura de pantalla de Docker Hub mostrando el repositorio `zifroapp/lab4-docker` con la tag `v1`*
 
 ---
 
